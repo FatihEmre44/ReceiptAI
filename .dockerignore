@@ -1,0 +1,8 @@
+node_modules
+.env
+.git
+.gitignore
+uploads
+qdrant_storage
+README.md
+*.md

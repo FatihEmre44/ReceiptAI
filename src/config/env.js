@@ -9,6 +9,16 @@ class Environment {
         this.QDRANT_URL = process.env.QDRANT_URL || 'http://localhost:6333';
         this.QDRANT_COLLECTION = process.env.QDRANT_COLLECTION_NAME || 'receipts';
 
+        // MongoDB
+        this.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/faturaai';
+
+        // Redis
+        this.REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
+
+        // JWT
+        this.JWT_SECRET = process.env.JWT_SECRET;
+        this.JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
+
         this._validate();
         Object.freeze(this);
     }
@@ -17,6 +27,9 @@ class Environment {
     _validate() {
         if (!this.OPENAI_API_KEY) {
             throw new Error('[ENV] OPENAI_API_KEY is required. Check your .env file.');
+        }
+        if (!this.JWT_SECRET) {
+            throw new Error('[ENV] JWT_SECRET is required. Check your .env file.');
         }
     }
 }

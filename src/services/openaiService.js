@@ -36,8 +36,11 @@ class OpenAIService {
                 "subtotal": 0.00,
                 "tax": 0.00,
                 "total": 0.00,
-                "paymentMethod": ""
+                "paymentMethod": "",
+                "category": ""
               }
+              For the "category" field, choose the single best-fit value from this list:
+              shopping, food, transportation, utilities, healthcare, entertainment, other.
               Return ONLY valid JSON, no markdown, no explanation.`,
                         },
                         {
@@ -52,7 +55,9 @@ class OpenAIService {
             max_tokens: 1000,
         });
 
-        const content = response.choices[0].message.content;
+        let content = response.choices[0].message.content;
+        // Strip markdown code fences if GPT wraps the JSON in ```json ... ```
+        content = content.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
         return JSON.parse(content);
     }
 

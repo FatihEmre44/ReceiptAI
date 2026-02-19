@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # ─── Node.js Application ──────────────────────────────────────────
+  app:
+    build: .
+    container_name: faturaai-app
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/faturaai
+      - REDIS_URL=redis://redis:6379
+      - QDRANT_URL=http://qdrant:6333
+    depends_on:
+      - mongodb
+      - redis
+      - qdrant
+    volumes:
+      - ./uploads:/app/uploads
+
+  # ─── MongoDB ──────────────────────────────────────────────────────
+  mongodb:
+    image: mongo:7
+    container_name: faturaai-mongodb
+    restart: unless-stopped
+    ports:
+      - '27022:27017'
+    volumes:
+      - mongodb_data:/data/db
+
+  # ─── Redis ────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: faturaai-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+
+  # ─── Qdrant Vector Database ──────────────────────────────────────
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: faturaai-qdrant
+    restart: unless-stopped
+    ports:
+      - '6333:6333'
+      - '6334:6334'
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  mongodb_data:
+  redis_data:
+  qdrant_data:
