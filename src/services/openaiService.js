@@ -1,6 +1,4 @@
-// ─── OpenAI Service ─────────────────────────────────────────────────
-// SRP: Handles ALL OpenAI API interactions (Vision + Embeddings).
-// DIP: Controller depends on this abstraction, not on the OpenAI lib directly.
+
 
 import OpenAI from 'openai';
 import env from '../config/env.js';

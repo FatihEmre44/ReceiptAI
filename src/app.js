@@ -1,13 +1,13 @@
-// ─── Load Environment Variables First ────────────────────────────────
+
 import 'dotenv/config';
 
-// ─── Core Dependencies ──────────────────────────────────────────────
+
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// ─── Internal Modules ───────────────────────────────────────────────
+
 import env from './config/env.js';
 import { connectMongoDB } from './config/mongodb.js';
 import redisClient from './config/redis.js';
@@ -15,26 +15,26 @@ import receiptRoutes from './routes/receiptRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import QdrantService from './services/qdrantService.js';
 
-// ─── ESM __dirname equivalent ───────────────────────────────────────
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ─── Express App Initialization ─────────────────────────────────────
+
 const app = express();
 
-// ─── Global Middlewares ─────────────────────────────────────────────
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ─── Static / Uploads Folder ────────────────────────────────────────
+
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-// ─── API Routes ─────────────────────────────────────────────────────
+
 app.use('/api/auth', authRoutes);
 app.use('/api/receipts', receiptRoutes);
 
-// ─── Health Check ───────────────────────────────────────────────────
+
 app.get('/health', (req, res) => {
     res.status(200).json({
         status: 'OK',
@@ -43,12 +43,12 @@ app.get('/health', (req, res) => {
     });
 });
 
-// ─── 404 Handler ────────────────────────────────────────────────────
+
 app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
 });
 
-// ─── Global Error Handler ───────────────────────────────────────────
+
 app.use((err, req, res, next) => {
     console.error(`[ERROR] ${err.message}`);
     res.status(err.status || 500).json({
@@ -57,7 +57,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-// ─── Start Server ───────────────────────────────────────────────────
+
 const PORT = env.PORT;
 
 async function startServer() {

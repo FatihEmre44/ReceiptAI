@@ -37,9 +37,6 @@ class AuthController {
         }
     }
 
-    /**
-     * POST /api/auth/login
-     */
     async login(req, res) {
         try {
             const { email, password } = req.body;

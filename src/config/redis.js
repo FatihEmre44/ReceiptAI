@@ -1,5 +1,4 @@
-// ─── Redis Client ───────────────────────────────────────────────────
-// SRP: Manages the singleton Redis (ioredis) connection.
+
 
 import Redis from 'ioredis';
 import env from './env.js';

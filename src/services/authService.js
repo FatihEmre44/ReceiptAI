@@ -1,6 +1,4 @@
-// ─── Auth Service ───────────────────────────────────────────────────
-// SRP: Handles user registration, login, and JWT generation.
-// DIP: Controller depends on this abstraction, not on bcrypt/jwt directly.
+
 
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';

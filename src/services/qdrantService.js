@@ -1,5 +1,4 @@
-// ─── Qdrant Service ─────────────────────────────────────────────────
-// SRP: All Qdrant vector DB operations — upsert, search, list by user.
+
 
 import { v4 as uuidv4 } from 'uuid';
 import { getClient } from '../config/db.js';

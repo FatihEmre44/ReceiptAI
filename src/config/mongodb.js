@@ -1,13 +1,9 @@
-// ─── MongoDB Connection ─────────────────────────────────────────────
-// SRP: Single responsibility — connect to MongoDB via Mongoose.
+
 
 import mongoose from 'mongoose';
 import env from './env.js';
 
-/**
- * Connects to MongoDB using Mongoose.
- * Logs connection status and throws on failure for fail-fast startup.
- */
+
 export async function connectMongoDB() {
     try {
         await mongoose.connect(env.MONGODB_URI);

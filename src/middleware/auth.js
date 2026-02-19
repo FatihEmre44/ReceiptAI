@@ -1,5 +1,4 @@
-// ─── Auth Middleware ─────────────────────────────────────────────────
-// SRP: Verifies JWT, checks Redis blacklist, attaches req.user.
+
 
 import jwt from 'jsonwebtoken';
 import env from '../config/env.js';
@@ -7,10 +6,7 @@ import RedisService from '../services/redisService.js';
 
 const redisService = new RedisService();
 
-/**
- * Express middleware that protects routes with JWT authentication.
- * Attaches `req.user = { id }` on success.
- */
+
 export default async function authMiddleware(req, res, next) {
     try {
         // 1. Extract token from Authorization header

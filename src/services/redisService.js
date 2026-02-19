@@ -1,5 +1,4 @@
-// ─── Redis Service ──────────────────────────────────────────────────
-// SRP: Token blacklist operations via Redis.
+
 
 import redisClient from '../config/redis.js';
 

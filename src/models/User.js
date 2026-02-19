@@ -1,5 +1,4 @@
-// ─── User Model ─────────────────────────────────────────────────────
-// SRP: Defines User schema and password-related logic.
+
 
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
@@ -34,18 +33,18 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-// ─── Pre-save Hook: Hash password before persisting ────────────────
+
 userSchema.pre('save', async function () {
     if (!this.isModified('password')) return;
     this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
 });
 
-// ─── Instance Method: Compare plain text against hash ──────────────
+
 userSchema.methods.comparePassword = async function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
 };
 
-// ─── Transform JSON output ────────────────────────────────────────
+
 userSchema.set('toJSON', {
     transform: (doc, ret) => {
         ret.id = ret._id;

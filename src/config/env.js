@@ -1,6 +1,4 @@
-// ─── Environment Configuration ──────────────────────────────────────
-// SRP: This class has one responsibility — centralize env variables.
-// Singleton: Only one instance is ever created and exported.
+
 
 class Environment {
     constructor() {
@@ -23,7 +21,7 @@ class Environment {
         Object.freeze(this);
     }
 
-    /** Fail-fast if critical keys are missing */
+
     _validate() {
         if (!this.OPENAI_API_KEY) {
             throw new Error('[ENV] OPENAI_API_KEY is required. Check your .env file.');
@@ -34,6 +32,6 @@ class Environment {
     }
 }
 
-// Export a single frozen instance (Singleton)
+
 const env = new Environment();
 export default env;

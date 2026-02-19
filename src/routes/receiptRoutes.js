@@ -1,5 +1,4 @@
-// ─── Receipt Routes ─────────────────────────────────────────────────
-// SRP: Only defines route mappings. No logic, no middleware config leaking.
+
 
 import express from 'express';
 import multer from 'multer';

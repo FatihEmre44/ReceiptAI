@@ -1,5 +1,3 @@
-// ─── Auth Routes ────────────────────────────────────────────────────
-// SRP: Only defines route mappings for authentication endpoints.
 
 import express from 'express';
 import AuthController from '../controllers/authController.js';
